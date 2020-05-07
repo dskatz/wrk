@@ -1,0 +1,23 @@
+---
+kind: pipeline
+type: kubernetes
+name: default
+
+steps:
+  - name: publish
+    image: plugins/ecr
+    settings:
+      create_repository: true
+      secrets: [ecr_registry]
+      registry: ${ECR_REGISTRY}
+      repo: ${ECR_REGISTRY}devops/${DRONE_REPO_NAME}
+      tags:
+        - git-${DRONE_COMMIT_SHA:0:7}
+        - latest
+      access_key:
+        from_secret: ecr_access_key
+      secret_key:
+        from_secret: ecr_secret_key
+    when:
+      event:
+        - push
