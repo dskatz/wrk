@@ -22,5 +22,6 @@ RUN echo "===> Installing  tools..."  && \
     rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* /opt/wrk/
 
 WORKDIR /data
+STOPSIGNAL SIGINT
 ENTRYPOINT ["wrk"]
 CMD ["--help"]
