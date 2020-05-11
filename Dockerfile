@@ -22,6 +22,7 @@ RUN echo "===> Installing  tools..."  && \
     rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* /opt/wrk/
 
 WORKDIR /data
+COPY report.lua .
 STOPSIGNAL SIGINT
 ENTRYPOINT ["wrk"]
 CMD ["--help"]
